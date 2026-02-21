@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <h3 class="text-center mb-3">Angular - ToDo CRUD</h3>
+    <div class="d-flex gap-2 mb-3">
+        <input type="text" placeholder="Enter ToDo Title" class="form-control" [(ngModel)]="newToDo.title">
+        <select class="form-select w-auto" [(ngModel)]="newToDo.category">
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+        </select>
+        <button class="btn btn-primary" (click)="addToDo()">Add</button>
+    </div>
+    <div class="d-flex justify-content-end mb-3">
+        <select class="form-select w-auto" [(ngModel)]="selectedCategory">
+            <option value="all">All</option>
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+        </select>
+    </div>
+    <table class="table table-bordered text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>CATEGORY</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todo of filteredToDos">
+                <td>{{todo.id}}</td>
+                <td>{{todo.title}}</td>
+                <td>{{todo.category}}</td>
+                <td><button class="btn btn-sm" [class.btn-success] = "todo.status === 'complete'" [class.btn-warning] = "todo.status === 'pending'" (click)="toggleStatus(todo)">{{todo.status}}</button></td>
+                <td><button class="btn btn-danger btn-sm" (click)="deleteToDo(todo.id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
